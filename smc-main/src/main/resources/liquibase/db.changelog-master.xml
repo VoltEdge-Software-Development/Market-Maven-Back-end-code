@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="1732008136395-1" author="Arch (generated)">
+        <createTable tableName="account">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_account"/>
+            </column>
+            <column name="account_name" type="VARCHAR(255)"/>
+            <column name="account_number" type="VARCHAR(255)"/>
+            <column name="amount" type="DECIMAL"/>
+            <column name="currency" type="VARCHAR(255)"/>
+            <column name="account_type" type="VARCHAR(255)"/>
+            <column name="smc_user_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1732008136395-2" author="Arch (generated)">
+        <createTable tableName="smc_user">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_smc_user"/>
+            </column>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="lastname" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="role" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1732008136395-3" author="Arch (generated)">
+        <createTable tableName="token">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_token"/>
+            </column>
+            <column name="token" type="VARCHAR(255)"/>
+            <column name="token_type" type="VARCHAR(255)"/>
+            <column name="revoked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1732008136395-4" author="Arch (generated)">
+        <addUniqueConstraint columnNames="token" constraintName="uc_token_token" tableName="token"/>
+    </changeSet>
+    <changeSet id="1732008136395-5" author="Arch (generated)">
+        <addForeignKeyConstraint baseColumnNames="smc_user_id" baseTableName="account"
+                                 constraintName="FK_ACCOUNT_ON_SMC_USER" referencedColumnNames="id"
+                                 referencedTableName="smc_user"/>
+    </changeSet>
+    <changeSet id="1732008136395-6" author="Arch (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="token" constraintName="FK_TOKEN_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="smc_user"/>
+    </changeSet>
+</databaseChangeLog>
