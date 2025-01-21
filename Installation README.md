@@ -10,6 +10,5 @@ open http://localhost:8080/swagger-ui.html
 For authentication:
       ADMIN - username: admin@mail.com
       -password: 1111
-
       USER - username: user@mail.com
       -password: 1111
